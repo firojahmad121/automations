@@ -1,5 +1,5 @@
 services:
-    Webkul\UVDesk\AutomationBundle\DataFixtures\:
+    Webkul\UVDesk\AutomationBundle\Fixtures\:
         resource: '../../Fixtures/*'
         arguments: ['@service_container', '@doctrine.orm.entity_manager']
         tags: ['doctrine.fixture.orm']
