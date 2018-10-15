@@ -94,7 +94,7 @@ class Conditions extends Controller
                         $results = [];
                 
                         foreach($allSources as $key => $source) {
-                           // if(empty($apps[$key]) || $this->container->get('support.service')->isThisAppInstalled($apps[$key])) {
+                           // if(empty($apps[$key]) || $this->container->get('uvdesk.service')->isThisAppInstalled($apps[$key])) {
                                 $results[] = [
                                             'id' => $key,
                                             'name' => $source,
