@@ -1,0 +1,15 @@
+services:
+    Webkul\UVDesk\AutomationBundle\DataFixtures\:
+        resource: '../../Fixtures/*'
+        arguments: ['@service_container', '@doctrine.orm.entity_manager']
+        tags: ['doctrine.fixture.orm']
+    
+    uvdesk.automations:
+        public: true
+        class: Webkul\UVDesk\AutomationBundle\Services\AutomationService
+        arguments: ['@service_container', '@request_stack', '@doctrine.orm.entity_manager']
+
+    workflow.service:
+        public: true
+        class: Webkul\UVDesk\AutomationBundle\Services\WorkflowService
+        arguments: ['@service_container', '@request_stack', '@doctrine.orm.entity_manager']
