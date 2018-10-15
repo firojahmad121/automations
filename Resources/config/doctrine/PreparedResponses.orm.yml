@@ -35,7 +35,7 @@ Webkul\UVDesk\AutomationBundle\Entity\PreparedResponses:
             type: datetime
     manyToOne:
         user:
-            targetEntity: Webkul\UVDesk\SupportBundle\Entity\UserInstance
+            targetEntity: Webkul\UVDesk\CoreBundle\Entity\UserInstance
             joinColumn:
                 name: user_id
                 referencedColumnName: id
@@ -44,7 +44,7 @@ Webkul\UVDesk\AutomationBundle\Entity\PreparedResponses:
     manyToMany:
         groups:
             nullable: true
-            targetEntity: Webkul\UVDesk\SupportBundle\Entity\SupportGroup
+            targetEntity: Webkul\UVDesk\CoreBundle\Entity\SupportGroup
             joinTable:
                 name: preparedresponse_supportgroups
                 joinColumns:
@@ -57,7 +57,7 @@ Webkul\UVDesk\AutomationBundle\Entity\PreparedResponses:
                         onDelete : cascade
         teams:
             nullable: true        
-            targetEntity: Webkul\UVDesk\SupportBundle\Entity\SupportTeam
+            targetEntity: Webkul\UVDesk\CoreBundle\Entity\SupportTeam
             joinTable:
                 name: preparedresponse_supportteams
                 joinColumns:

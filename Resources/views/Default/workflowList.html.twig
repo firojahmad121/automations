@@ -1,4 +1,4 @@
-{% extends "@UVDeskCommunity/BackSupport/layout.html.twig" %}
+{% extends "@UVDeskCore/Templates/layout.html.twig" %}
 
 {% block title %} 
 	{{ 'Workflows'|trans }}
@@ -12,7 +12,7 @@
 	 	}
 	 </style>
 	<div class="uv-inner-section">
-		 {{ include('@UVDeskCommunity/BackSupport/panel-sidebar.html.twig') }}
+		 {{ include('@UVDeskCore/Templates/panel-sidebar.html.twig') }}
 		<div class="uv-view {% if app.request.cookies and app.request.cookies.get('uv-asideView') %}uv-aside-view{% endif %}">
 			<div class="uv-action-bar">
                 <div class="uv-action-bar-col-lt">

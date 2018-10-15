@@ -245,10 +245,10 @@ class PreparedResponses
     /**
      * Set user
      *
-     * @param \Webkul\UVDesk\SupportBundle\Entity\UserInstance $user
+     * @param \Webkul\UVDesk\CoreBundle\Entity\UserInstance $user
      * @return PreparedResponses
      */
-    public function setUser(\Webkul\UVDesk\SupportBundle\Entity\UserInstance $user = null)
+    public function setUser(\Webkul\UVDesk\CoreBundle\Entity\UserInstance $user = null)
     {
         $this->user = $user;
 
@@ -258,7 +258,7 @@ class PreparedResponses
     /**
      * Get user
      *
-     * @return \Webkul\UVDesk\SupportBundle\Entity\UserInstance 
+     * @return \Webkul\UVDesk\CoreBundle\Entity\UserInstance 
      */
     public function getUser()
     {
@@ -289,10 +289,10 @@ class PreparedResponses
     /**
      * Add groups
      *
-     * @param \Webkul\UVDesk\SupportBundle\Entity\SupportGroup $groups
+     * @param \Webkul\UVDesk\CoreBundle\Entity\SupportGroup $groups
      * @return PreparedResponses
      */
-    public function addGroup(\Webkul\UVDesk\SupportBundle\Entity\SupportGroup $groups)
+    public function addGroup(\Webkul\UVDesk\CoreBundle\Entity\SupportGroup $groups)
     {
         $this->groups[] = $groups;
 
@@ -302,9 +302,9 @@ class PreparedResponses
     /**
      * Remove groups
      *
-     * @param \Webkul\UVDesk\SupportBundle\Entity\SupportGroup $groups
+     * @param \Webkul\UVDesk\CoreBundle\Entity\SupportGroup $groups
      */
-    public function removeGroup(\Webkul\UVDesk\SupportBundle\Entity\SupportGroup $groups)
+    public function removeGroup(\Webkul\UVDesk\CoreBundle\Entity\SupportGroup $groups)
     {
         $this->groups->removeElement($groups);
     }
@@ -322,10 +322,10 @@ class PreparedResponses
     /**
      * Add teams
      *
-     * @param \Webkul\UVDesk\SupportBundle\Entity\SupportTeam $teams
+     * @param \Webkul\UVDesk\CoreBundle\Entity\SupportTeam $teams
      * @return PreparedResponses
      */
-    public function addTeam(\Webkul\UVDesk\SupportBundle\Entity\SupportTeam $teams)
+    public function addTeam(\Webkul\UVDesk\CoreBundle\Entity\SupportTeam $teams)
     {
         $this->teams[] = $teams;
 
@@ -335,9 +335,9 @@ class PreparedResponses
     /**
      * Remove teams
      *
-     * @param \Webkul\UVDesk\SupportBundle\Entity\SupportTeam $teams
+     * @param \Webkul\UVDesk\CoreBundle\Entity\SupportTeam $teams
      */
-    public function removeTeam(\Webkul\UVDesk\SupportBundle\Entity\SupportTeam $teams)
+    public function removeTeam(\Webkul\UVDesk\CoreBundle\Entity\SupportTeam $teams)
     {
         $this->teams->removeElement($teams);
     }

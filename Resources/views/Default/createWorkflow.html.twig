@@ -1,4 +1,4 @@
-{% extends "@UVDeskCommunity/BackSupport/layout.html.twig" %}
+{% extends "@UVDeskCore/Templates/layout.html.twig" %}
 
 {% block title %}
     {% if app.request.get('id') %}
@@ -49,7 +49,7 @@
     </style>
     <!-- Inner Section -->
     <div class="uv-inner-section">
-        {{ include('@UVDeskCommunity/BackSupport/panel-sidebar.html.twig') }}
+        {{ include('@UVDeskCore/Templates/panel-sidebar.html.twig') }}
         <!-- View -->
         <div class="uv-view {% if app.request.cookies and app.request.cookies.get('uv-asideView') %}uv-aside-view{% endif %}">
             <!-- Form -->
