@@ -26,7 +26,7 @@ SVG;
     public function loadDashboardItems()
     {
         return [
-            HelpdeskSection::HELPDESK_AUTOMATION => [
+            HelpdeskSection::AUTOMATION => [
                 [
                     'name' => 'Workflows',
                     'route' => 'helpdesk_member_workflow_collection',
