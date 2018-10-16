@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Webkul\UserBundle\Controller\BaseController;
-use Webkul\TicketBundle\Entity;
 
 class Conditions extends Controller
 {    
@@ -24,7 +23,7 @@ class Conditions extends Controller
                     case 'TicketPriority':
                     case 'TicketStatus':
                         $results = $this->getDoctrine()
-                                        ->getRepository('UVDeskTicketBundle:'.ucfirst($request->attributes->get('entity')))
+                                        ->getRepository('UVDeskCoreBundle:'.ucfirst($request->attributes->get('entity')))
                                         ->findBy(
                                             array(
                                                     // 'companyId' => $this->getCurrentCompany()->getId()
@@ -107,7 +106,7 @@ class Conditions extends Controller
                         $cfId = str_replace(['customFields[', ']'], ['', ''], $request->attributes->get('entity') );
 
                         $em = $this->getDoctrine()->getManager();
-                        $cf = $em->getRepository('UVDeskTicketBundle:CustomFields')
+                        $cf = $em->getRepository('UVDeskCoreBundle:CustomFields')
                                          ->findOneBy(['id' => $cfId ]);
                         $cfValues = $cf->getCustomFieldValues();
                         if($cf) {

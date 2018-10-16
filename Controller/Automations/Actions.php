@@ -5,7 +5,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Webkul\UVDesk\TicketBundle\Entity;
 
 class Actions extends Controller
 {    
@@ -45,7 +44,7 @@ class Actions extends Controller
                 switch ($request->attributes->get('entity')) {
                     case 'TicketStatus':
                         $results = $this->getDoctrine()
-                                        ->getRepository('UVDeskTicketBundle:'.ucfirst($request->attributes->get('entity')))
+                                        ->getRepository('UVDeskCoreBundle:'.ucfirst($request->attributes->get('entity')))
                                         ->findBy(
                                             array(
                                                     // 'companyId' => $this->getCurrentCompany()->getId()
@@ -63,7 +62,7 @@ class Actions extends Controller
                         break;
                     case 'TicketPriority':
                         $results = $this->getDoctrine()
-                                        ->getRepository('UVDeskTicketBundle:'.ucfirst($request->attributes->get('entity')))
+                                        ->getRepository('UVDeskCoreBundle:'.ucfirst($request->attributes->get('entity')))
                                         ->findBy(
                                             array(
                                                     // 'companyId' => $this->getCurrentCompany()->getId()
@@ -130,7 +129,7 @@ class Actions extends Controller
                         if($currentPlan && $currentPlan->getWorkflow() == 'predefind')
                             $filter['isPredefind'] = 1;
                         $results = $this->getDoctrine()
-                                        ->getRepository('UVDeskTicketBundle:EmailTemplates')
+                                        ->getRepository('UVDeskCoreBundle:EmailTemplates')
                                         ->findBy($filter);
                                    
                         $emailTemplates = $json = [];
@@ -189,7 +188,7 @@ class Actions extends Controller
                         break;
                     case 'tag':
                         $results = $this->getDoctrine()
-                                        ->getRepository('UVDeskTicketBundle:'.ucfirst($request->attributes->get('entity')))
+                                        ->getRepository('UVDeskCoreBundle:'.ucfirst($request->attributes->get('entity')))
                                         ->findBy(
                                             array(
                                                    // 'company' => $this->getCurrentCompany()->getId(),

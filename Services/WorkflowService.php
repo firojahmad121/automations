@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Webkul\UVDesk\TicketBundle\Entity\Ticket;
+use Webkul\UVDesk\CoreBundle\Entity\Ticket;
 
 class WorkflowService
 {
@@ -358,7 +358,7 @@ class WorkflowService
     public function disableEvent($event, $object)
     {
         return;
-        if (get_class($event) == 'Webkul\TicketBundle\Entity\Events') {
+        if (get_class($event) == 'Webkul\CoreBundle\Entity\Events') {
             // Disable Workflow
             $event->setStatus(false);
             $this->em->persist($event);
@@ -369,7 +369,7 @@ class WorkflowService
                 'entity' => $object,
                 'targetEntity' => $event
             ]);
-        } elseif (get_class($event) == 'Webkul\TicketBundle\Entity\PreparedResponses') {
+        } elseif (get_class($event) == 'Webkul\CoreBundle\Entity\PreparedResponses') {
             // Disable Prepared Response
             $event->setStatus(false);
             $this->em->persist($event);
@@ -533,7 +533,7 @@ class WorkflowService
         //             else
         //                 $thread = $this->container->get('ticket.service')->getTicketLastThread($this->object->getId());
 
-        //             $attachments = $this->em->getRepository('WebkulTicketBundle:Attachment')->findBy(array('thread'=>$thread->getId()));
+        //             $attachments = $this->em->getRepository('WebkulCoreBundle:Attachment')->findBy(array('thread'=>$thread->getId()));
         //             $fileService = $this->container->get('file.service');
         //             foreach ($attachments as $attachment) {
         //                 if($attachment->getFileSystem()) {
@@ -554,7 +554,7 @@ class WorkflowService
         //                 }
         //             }
 
-        //             $attachments = $this->em->getRepository('WebkulTicketBundle:Attachment')->findBy(array('taskThread'=>$thread->getId()));
+        //             $attachments = $this->em->getRepository('WebkulCoreBundle:Attachment')->findBy(array('taskThread'=>$thread->getId()));
 
         //             $fileService = $this->container->get('file.service');
         //             foreach ($attachments as $attachment) {
@@ -638,7 +638,7 @@ class WorkflowService
                 $fileService = $this->container->get('file.service');
                 $thread = $this->container->get('ticket.service')->getTicketLastThread($object->getId());
 
-                $attachments = $this->em->getRepository('WebkulTicketBundle:Attachment')->findBy(array('thread'=>$thread->getId()));
+                $attachments = $this->em->getRepository('WebkulCoreBundle:Attachment')->findBy(array('thread'=>$thread->getId()));
 
                 foreach ($attachments as $attachment) {
                     if($attachment->getFileSystem()) {
