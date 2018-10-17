@@ -18,8 +18,5 @@ class UVDeskExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');
-
-        // $configuration = $this->getConfiguration($configs, $container);
-        // $container->setParameter('uvdesk_tickets', $this->processConfiguration($configuration, $configs));
     }
 }
