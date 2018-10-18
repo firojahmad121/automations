@@ -3,6 +3,7 @@
 namespace Webkul\UVDesk\AutomationBundle\Repository;
 
 use Doctrine\Common\Collections\Criteria;
+
 /**
  * WorkflowRepository
  *
@@ -13,6 +14,19 @@ class WorkflowRepository extends \Doctrine\ORM\EntityRepository
 {
     public $safeFields = array('page','limit','sort','order','direction');
     const LIMIT = 10;
+
+    public function getEventWorkflows($eventName, $isActive = true, $isPredefined = true)
+    {
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select('workflow')
+            ->from('UVDeskAutomationBundle:Workflow', 'workflow')
+            ->leftJoin('workflow.workflowEvents', 'workflowEvents')
+            ->where('workflow.status = :status')->setParameter('status', $isActive)
+            ->andWhere('workflow.isPredefind = :isPredefined')->setParameter('isPredefined', $isPredefined)
+            ->andWhere('workflowEvents.event = :eventType')->setParameter('eventType', $eventName)
+            ->orderBy('workflow.sortOrder', Criteria::ASC)
+            ->getQuery()->getResult();
+    }
 
 	public function getWorkflows(\Symfony\Component\HttpFoundation\ParameterBag $obj = null, $container) {
         // $userService = $container->get('user.service');

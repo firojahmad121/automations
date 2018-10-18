@@ -13,3 +13,8 @@ services:
         public: true
         class: Webkul\UVDesk\AutomationBundle\Services\WorkflowService
         arguments: ['@service_container', '@request_stack', '@doctrine.orm.entity_manager']
+    
+    Webkul\UVDesk\AutomationBundle\EventListener\WorkflowListener:
+        arguments: ['@service_container', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: kernel.event_listener, event: uvdesk.automation.workflow.execute, method: executeWorkflow }

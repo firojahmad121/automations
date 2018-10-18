@@ -115,6 +115,9 @@ Class WorkflowSubscriber implements EventSubscriberInterface
     }
 
     public function replyAdded(ActivityEvent $event) {
+        dump($event);
+        die;
+        
         $this->setEvent($event);
         $event = "";
 
