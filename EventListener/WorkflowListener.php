@@ -82,6 +82,10 @@ class WorkflowListener
         $index = -1;
         $workflowConditions = [];
 
+        if ($workflow->getConditions() == null) {
+            return $workflowConditions;
+        }
+
         foreach ($workflow->getConditions() as $condition) {
             if (!empty($condition['operation']) && $condition['operation'] != "&&") {
                 if (!isset($finalConditions[$index]['or'])) {

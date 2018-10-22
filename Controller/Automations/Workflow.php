@@ -324,7 +324,7 @@ class Workflow extends Controller
 
                 foreach ($formDataGetEvents as $eventEvents) {
                     $event = new Entity\WorkflowEvents;
-                    $event->setEvent($eventEvents['event'] . '.' . $eventEvents['trigger']);
+                    $event->setEvent($eventEvents['trigger']);
                     $event->setWorkflow($newWorkflow);
                     $event->setEventId($newWorkflow->getId());
                     $entityManager->persist($event);

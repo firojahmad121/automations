@@ -20,7 +20,7 @@ class Actions extends Controller
     {
         $workflowActionId = $request->attributes->get('entity');
 
-        foreach ($this->container->get('workflow.listener.alias')->getTaggedServices() as $workflowAction) {
+        foreach ($this->container->get('workflow.listener.alias')->getRegisteredWorkflowActions() as $workflowAction) {
             if ($workflowAction->getId() == $workflowActionId) {
                 $options = $workflowAction->getOptions($this->container);
 
