@@ -6,44 +6,15 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webkul\UVDesk\AutomationBundle\Entity\Workflow;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Webkul\UVDesk\AutomationBundle\Workflow\Event as WorkflowEvent;
+use Webkul\UVDesk\AutomationBundle\Workflow\Action as WorkflowAction;
 
 class WorkflowListener
 {
     private $container;
     private $entityManager;
-    private $eventMap = [
-        'ticket.created' => 'ticket.created',
-        'ticket.deleted' => 'ticket.deleted',
-        'ticket.thread.updated' => 'ticket.threadUpload',
-        'ticket.priority.updated' => 'ticket.priority',
-        'ticket.status.updated' => 'ticket.status',
-        'ticket.type.updated' => 'ticket.type',
-        'ticket.group.updated' => 'ticket.group',
-        'ticket.team.updated' => 'ticket.team',
-        'ticket.agent.updated' => 'ticket.agent',
-        'ticket.collaborator.added' => 'ticket.collaboratorAdded',
-        'ticket.note.added' => 'ticket.note',
-        'ticket.reply.added.agent' => 'ticket.replyAgent',
-        'ticket.reply.added.customer' => 'ticket.replyCustomer',
-        'ticket.reply.added.collaborator' => 'ticket.replyByCollaborator',
-
-        'task.created' => 'task.created',
-        'task.updated' => 'task.updated',
-        'task.deleted' => 'task.deleted',
-        'task.member.added' => 'task.memberAdded',
-        'task.member.deleted' => 'task.memberRemoved',
-        'task.reply.added' => 'task.reply',
-
-        'agent.created' => 'agent.created',
-        'agent.updated' => 'agent.updated',
-        'agent.deleted' => 'agent.deleted',
-        'agent.forgot.password' => 'agent.forgotPassword',
-
-        'customer.created' => 'customer.created',
-        'customer.updated' => 'customer.updated',
-        'customer.deleted' => 'customer.deleted',
-        'customer.forgot.password' => 'customer.forgotPassword',
-    ];
+    private $registeredWorkflowEvents = [];
+    private $registeredWorkflowActions = [];
 
     public function __construct(ContainerInterface $container, EntityManager $entityManager)
     {
@@ -51,9 +22,28 @@ class WorkflowListener
         $this->entityManager = $entityManager;
     }
 
+    public function registerWorkflowEvent(WorkflowEvent $serviceTag)
+    {
+        $this->registeredWorkflowEvents[] = $serviceTag;
+    }
+
+    public function registerWorkflowAction(WorkflowAction $serviceTag)
+    {
+        $this->registeredWorkflowActions[] = $serviceTag;
+    }
+
+    public function getRegisteredWorkflowEvents()
+    {
+        return $this->registeredWorkflowEvents;
+    }
+
+    public function getRegisteredWorkflowActions()
+    {
+        return $this->registeredWorkflowActions;
+    }
+
     public function executeWorkflow(GenericEvent $event)
     {
-        dump($event->getSubject());
         $workflowCollection = $this->entityManager->getRepository('UVDeskAutomationBundle:Workflow')->getEventWorkflows($event->getSubject());
 
         if (!empty($workflowCollection)) {
@@ -63,6 +53,7 @@ class WorkflowListener
 
                 foreach ($this->evaluateWorkflowConditions($workflow) as $workflowCondition) {
                     dump($workflowCondition);
+                    die;
                     // $totalEvaluatedConditions++;
 
                     // if (isset($workflowCondition['type']) && $this->checkCondition($workflowCondition)) {
@@ -79,16 +70,11 @@ class WorkflowListener
                     // }
                 }
 
-                dump($totalEvaluatedConditions > 0 || $totalConditions >= $totalEvaluatedConditions);
-                die;
-
-                // if ($totalEvaluatedConditions > 0 || $totalConditions >= $totalEvaluatedConditions) {
-                //     $this->applyResponse($event , $this->object);
-                // }
+                if ($totalEvaluatedConditions > 0 || $totalConditions >= $totalEvaluatedConditions) {
+                    $this->applyWorkflowActions($workflow , $event->getArgument('entity'));
+                }
             }
         }
-
-        die;
     }
 
     private function evaluateWorkflowConditions(Workflow $workflow)
@@ -110,5 +96,20 @@ class WorkflowListener
         }
 
         return $workflowConditions;
+    }
+
+    private function applyWorkflowActions(Workflow $workflow, $entity)
+    {
+        foreach ($workflow->getActions() as $attributes) {
+            if (empty($attributes['type'])) {
+                continue;
+            }
+
+            foreach ($this->getRegisteredWorkflowActions() as $workflowAction) {
+                if ($workflowAction->getId() == $attributes['type']) {
+                    $workflowAction->applyAction($this->container, $entity, $attributes['value']);
+                }
+            }
+        }
     }
 }

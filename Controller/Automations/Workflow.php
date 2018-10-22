@@ -180,7 +180,8 @@ class Workflow extends Controller
 
     public function editWorkflow(Request $request)
     {
-
+        // dump($this->get('uvdesk.automations')->getTicketActions());
+        // die;
         $error = $formData = $formerror = [];
         $entityManager = $this->getDoctrine()->getManager();
 

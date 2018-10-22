@@ -63,7 +63,7 @@
 	var sB = sB || {};
 
 	sB.actionRow = 0;
-	sB.JsonActions = JSON.parse("{{ ticket_service.getTicketActions(forcedActions is defined and forcedActions ? true : false) | json_encode | e('js') }}");
+	sB.JsonActions = JSON.parse("{{ uvdesk_automations.getTicketActions(forcedActions is defined and forcedActions ? true : false) | json_encode | e('js') }}");
 
 	sB.ActionCollection = Backbone.Collection.extend({
 	    baseUrl: "{{ path('webkul_actions_xhr') }}",
@@ -119,14 +119,14 @@
 			// if(value == 'delete_ticket' || value == 'mark_spam')
 			this.siblingValue.find('select, textarea, div').remove();
 
-			if (value == 'note' || value == 'reply') {
+			if (value == 'uvdesk.agent.add_note' || value == 'reply') {
 				this.siblingValue.prepend(this.valueTextTemplate(_.extend(this.model, {'keyNo': this.keyNo})));
-			} else if (value != 'delete_ticket' && value != 'mark_spam' && value) {
+			} else if (value != 'uvdesk.ticket.delete' && value != 'uvdesk.ticket.mark_spam' && value) {
 				this.selectOpt.prop('disabled', true);
 				this.disable = true;
 				if (value == 'cc' || value == 'bcc') {
 					this.siblingValue.prepend(this.valueSelectMultipleTemplate(_.extend(this.model, {'keyNo': this.keyNo})));
-				} else if(this.value == 'mail_group' || this.value == 'mail_team' || this.value == "mail_agent") {
+				} else if(this.value == 'uvdesk.ticket.mail_group' || this.value == 'uvdesk.ticket.mail_team' || this.value == "uvdesk.ticket.mail_agent") {
 					this.siblingValue.prepend(this.valueMultiSelectTemplate(_.extend(this.model, {'keyNo': this.keyNo})));
 				} else {
 					this.siblingValue.prepend(this.valueSelectTemplate(_.extend(this.model, {'keyNo': this.keyNo})));
@@ -148,7 +148,7 @@
 			return ($('.wfEvents').eq(0).val() ? $('.wfEvents').eq(0).val() : 'ticket');
 		},
 		addAll: function() {
-			if(this.value == 'mail_group' || this.value == 'mail_team' || this.value == "mail_agent")
+			if(this.value == 'uvdesk.ticket.mail_group' || this.value == 'uvdesk.ticket.mail_team' || this.value == "uvdesk.ticket.mail_agent")
 				_.each(sB.actionCollection.models, this.addOneMore, this);
 			else
 				_.each(sB.actionCollection.models, this.addOne, this);

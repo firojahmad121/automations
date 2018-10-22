@@ -174,7 +174,7 @@ class AutomationWorkflowFixtures extends DoctrineFixture
             'name' => 'Ticket reply by agent - update ticket status',
             'description' => 'Ticket reply by agent - update ticket status',
             'conditions' => 'a:2:{i:0;a:3:{s:4:"type";s:6:"status";s:5:"match";s:5:"isNot";s:5:"value";s:1:"6";}i:2;a:4:{s:4:"type";s:6:"status";s:5:"match";s:5:"isNot";s:9:"operation";s:2:"&&";s:5:"value";s:1:"5";}}',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:6:"status";s:5:"value";s:1:"6";}}',
+            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:27:"uvdesk.ticket.update_status";s:5:"value";s:1:"6";}}',
             'emailTemplate' => false,
             'status' => '1',
             'sort_order' => NULL,

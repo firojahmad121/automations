@@ -12,9 +12,13 @@ services:
     workflow.service:
         public: true
         class: Webkul\UVDesk\AutomationBundle\Services\WorkflowService
-        arguments: ['@service_container', '@request_stack', '@doctrine.orm.entity_manager']
+        arguments: ['@service_container', '@request_stack', '@doctrine.orm.entity_manager', '@workflow.listener.alias']
     
     Webkul\UVDesk\AutomationBundle\EventListener\WorkflowListener:
         arguments: ['@service_container', '@doctrine.orm.entity_manager']
         tags:
             - { name: kernel.event_listener, event: uvdesk.automation.workflow.execute, method: executeWorkflow }
+    
+    workflow.listener.alias:
+        alias: Webkul\UVDesk\AutomationBundle\EventListener\WorkflowListener
+        public: true
