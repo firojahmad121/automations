@@ -13,142 +13,112 @@ class AutomationWorkflowFixtures extends DoctrineFixture
             'name' => 'Ticket reply by agent',
             'description' => 'Ticket Reply added by agent',
             'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:13:"mail_customer";s:5:"value";s:5:"ARTCT";}}',
+            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:29:"uvdesk.customer.mail_customer";s:5:"value";s:5:"ARTCT";}}',
             'emailTemplate' => 'ARTCT',
             'status' => '1',
             'sort_order' => '8',
-            'events' => ['ticket.replyAgent']
+            'events' => ['uvdesk.ticket.agent_reply']
         ],
         [
             'name' => 'Ticket reply by customer',
             'description' => 'Ticket reply by customer ',
             'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:10:"mail_agent";s:5:"value";a:2:{s:3:"for";a:1:{i:0;s:13:"assignedAgent";}s:5:"value";s:3:"CRT";}}}',
+            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:23:"uvdesk.agent.mail_agent";s:5:"value";a:2:{s:3:"for";a:1:{i:0;s:13:"assignedAgent";}s:5:"value";s:3:"CRT";}}}',
             'emailTemplate' => 'CRT',
             'status' => '1',
             'sort_order' => '9',
-            'events' => ['ticket.replyCustomer']
+            'events' => ['uvdesk.ticket.customer_reply']
         ],
         [
             'name' => 'Account validation of customer ',
             'description' => 'Account validation of customer ',
             'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:13:"mail_customer";s:5:"value";s:2:"AA";}}',
+            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:29:"uvdesk.customer.mail_customer";s:5:"value";s:2:"AA";}}',
             'emailTemplate' => 'AA',
             'status' => '1',
             'sort_order' => '14',
-            'events' => ['customer.created']
+            'events' => ['uvdesk.customer.created']
         ],
         [
             'name' => 'Account activation of agent',
             'description' => 'Account activation of agent',
             'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:10:"mail_agent";s:5:"value";a:2:{s:3:"for";a:1:{i:0;s:9:"baseAgent";}s:5:"value";s:2:"AA";}}}',
+            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:23:"uvdesk.agent.mail_agent";s:5:"value";a:2:{s:3:"for";a:1:{i:0;s:9:"baseAgent";}s:5:"value";s:2:"AA";}}}',
             'emailTemplate' => 'AA',
             'status' => '1',
             'sort_order' => '13',
-            'events' => ['agent.created']
-        ],
-        [
-            'name' => 'Member added in task',
-            'description' => 'Member added in task',
-            'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:12:"mail_members";s:5:"value";s:3:"MAT";}}',
-            'emailTemplate' => 'MAT',
-            'status' => '1',
-            'sort_order' => '6',
-            'events' => ['task.memberAdded']
+            'events' => ['uvdesk.agent.created']
         ],
         [
             'name' => 'Customer Forgot password ',
             'description' => 'Customer Forgot password ',
             'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:13:"mail_customer";s:5:"value";s:3:"CFP";}}',
+            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:29:"uvdesk.customer.mail_customer";s:5:"value";s:3:"CFP";}}',
             'emailTemplate' => 'CFP',
             'status' => '1',
             'sort_order' => '11',
-            'events' => ['customer.forgotPassword']
+            'events' => ['uvdesk.customer.forgot_password']
         ],
         [
             'name' => 'Collaborator Added In A Ticket',
             'description' => 'Collaborator Added In A Ticket',
             'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:10:"mail_agent";s:5:"value";a:2:{s:3:"for";a:1:{i:0;s:13:"assignedAgent";}s:5:"value";s:4:"CATT";}}}',
+            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:23:"uvdesk.agent.mail_agent";s:5:"value";a:2:{s:3:"for";a:1:{i:0;s:13:"assignedAgent";}s:5:"value";s:4:"CATT";}}}',
             'emailTemplate' => 'CATT',
             'status' => '1',
             'sort_order' => '1',
-            'events' => ['ticket.collaboratorAdded']
+            'events' => ['uvdesk.ticket.collaborator_updated']
         ],
         [
             'name' => 'Collaborator Added A Reply',
             'description' => 'Reply added by collaborator',
             'conditions' => 'N;',
-            'actions' => 'a:2:{i:0;a:2:{s:4:"type";s:10:"mail_agent";s:5:"value";s:3:"CAR";}i:1;a:2:{s:4:"type";s:13:"mail_customer";s:5:"value";s:3:"CAR";}}',
+            'actions' => 'a:2:{i:0;a:2:{s:4:"type";s:23:"uvdesk.agent.mail_agent";s:5:"value";s:3:"CAR";}i:1;a:2:{s:4:"type";s:29:"uvdesk.customer.mail_customer";s:5:"value";s:3:"CAR";}}',
             'emailTemplate' => 'CAR',
             'status' => '1',
             'sort_order' => '2',
-            'events' => ['ticket.replyByCollaborator']
-        ],
-        [
-            'name' => 'Task Created',
-            'description' => 'A new task assigned to you.',
-            'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:10:"mail_agent";s:5:"value";a:2:{s:3:"for";a:1:{i:0;s:13:"assignedAgent";}s:5:"value";s:2:"TC";}}}',
-            'emailTemplate' => 'TC',
-            'status' => '1',
-            'sort_order' => '7',
-            'events' => ['task.created']
-        ],
-        [
-            'name' => 'Member Reply In task',
-            'description' => 'Member Reply In task',
-            'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:12:"mail_members";s:5:"value";s:3:"MRT";}}',
-            'emailTemplate' => 'MRT',
-            'status' => '1',
-            'sort_order' => '5',
-            'events' => ['task.reply']
+            'events' => ['uvdesk.ticket.collaborator_reply']
         ],
         [
             'name' => 'Agent Forgot Password',
             'description' => 'Agent Forgot Password. ',
             'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:10:"mail_agent";s:5:"value";a:2:{s:3:"for";a:1:{i:0;s:9:"baseAgent";}s:5:"value";s:3:"AFP";}}}',
+            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:23:"uvdesk.agent.mail_agent";s:5:"value";a:2:{s:3:"for";a:1:{i:0;s:9:"baseAgent";}s:5:"value";s:3:"AFP";}}}',
             'emailTemplate' => 'AFP',
             'status' => '1',
             'sort_order' => '12',
-            'events' => ['agent.forgotPassword']
+            'events' => ['uvdesk.agent.forgot_password']
         ],
         [
             'name' => 'Assign ticket to Admin when ticket generated (for starting, please update this) ',
             'description' => 'Ticket generated by customer ',
             'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:12:"assign_agent";s:5:"value";s:1:"%";}}',
+            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:26:"uvdesk.ticket.assign_agent";s:5:"value";s:1:"%";}}',
             'emailTemplate' => false,
             'assign_agent' => true,
             'status' => '1',
             'sort_order' => NULL,
-            'events' => ['ticket.created']
+            'events' => ['uvdesk.ticket.created']
         ],
         [
             'name' => 'Ticket Assign Mail',
             'description' => 'Ticket Assign Mail',
             'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:10:"mail_agent";s:5:"value";a:2:{s:3:"for";a:1:{i:0;s:13:"assignedAgent";}s:5:"value";s:2:"TA";}}}',
+            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:23:"uvdesk.agent.mail_agent";s:5:"value";a:2:{s:3:"for";a:1:{i:0;s:13:"assignedAgent";}s:5:"value";s:2:"TA";}}}',
             'emailTemplate' => 'TA',
             'status' => '1',
             'sort_order' => NULL,
-            'events' => ['ticket.agent']
+            'events' => ['uvdesk.ticket.agent_updated']
         ],
         [
             'name' => 'Ticket generated by customer',
             'description' => 'Ticket generated by customer',
             'conditions' => 'N;',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:13:"mail_customer";s:5:"value";s:4:"TGBC";}}',
+            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:29:"uvdesk.customer.mail_customer";s:5:"value";s:4:"TGBC";}}',
             'emailTemplate' => 'TGBC',
             'status' => '1',
             'sort_order' => NULL,
-            'events' => ['ticket.created']
+            'events' => ['uvdesk.ticket.created']
         ],
         [
             'name' => 'Mail when collaborator added',
@@ -158,7 +128,7 @@ class AutomationWorkflowFixtures extends DoctrineFixture
             'emailTemplate' => 'MTC',
             'status' => '1',
             'sort_order' => NULL,
-            'events' => ['ticket.collaboratorAdded']
+            'events' => ['uvdesk.ticket.collaborator_updated']
         ],
         [
             'name' => 'Transfer tickets from deleted agent',
@@ -168,7 +138,7 @@ class AutomationWorkflowFixtures extends DoctrineFixture
             'emailTemplate' => false,
             'status' => '1',
             'sort_order' => NULL,
-            'events' => ['agent.deleted']
+            'events' => ['uvdesk.agent.removed']
         ],
         [
             'name' => 'Ticket reply by agent - update ticket status',
@@ -178,17 +148,17 @@ class AutomationWorkflowFixtures extends DoctrineFixture
             'emailTemplate' => false,
             'status' => '1',
             'sort_order' => NULL,
-            'events' => ['ticket.replyAgent']
+            'events' => ['uvdesk.ticket.agent_reply']
         ],
         [
             'name' => 'Ticket reply by customer - update ticket status',
             'description' => 'Ticket reply by customer - update ticket status',
             'conditions' => 'a:2:{i:0;a:3:{s:4:"type";s:6:"status";s:5:"match";s:5:"isNot";s:5:"value";s:1:"1";}i:1;a:4:{s:4:"type";s:6:"status";s:5:"match";s:5:"isNot";s:9:"operation";s:2:"&&";s:5:"value";s:1:"5";}}',
-            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:6:"status";s:5:"value";s:1:"1";}}',
+            'actions' => 'a:1:{i:0;a:2:{s:4:"type";s:27:"uvdesk.ticket.update_status";s:5:"value";s:1:"1";}}',
             'emailTemplate' => false,
             'status' => '1',
             'sort_order' => NULL,
-            'events' => ['ticket.replyCustomer','ticket.replyByCollaborator']
+            'events' => ['uvdesk.ticket.customer_reply', 'uvdesk.ticket.collaborator_reply']
         ]
     ];
 
@@ -220,7 +190,7 @@ class AutomationWorkflowFixtures extends DoctrineFixture
                 }
 
                 // foreach ($workflow_actions as $key => $action) {
-                //     if (isset($action['type']) && $action['type'] == 'assign_agent'){
+                //     if (isset($action['type']) && $action['type'] == 'uvdesk.ticket.assign_agent'){
                 //         $workflow_actions[$key]['value'] = $user->getId();
                 //     } 
                 //     elseif (!empty($emailTemplateId)) {
