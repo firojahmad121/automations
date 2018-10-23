@@ -1,0 +1,73 @@
+Webkul\UVDesk\AutomationBundle\Entity\PreparedResponses:
+    type: entity
+    table: null
+    repositoryClass: Webkul\UVDesk\AutomationBundle\Repository\PreparedResponsesRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 2500
+            nullable: true
+        type:
+            type: string
+            length: 255
+            nullable: true
+            options:
+                default: public
+        actions:
+            type: array
+        status:
+            type: boolean
+            nullable: true
+            options:
+                default: 1
+        dateAdded:
+            type: datetime
+        dateUpdated:
+            type: datetime
+    manyToOne:
+        user:
+            targetEntity: Webkul\UVDesk\CoreBundle\Entity\UserInstance
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+                nullable: true
+                onDelete: SET NULL
+    manyToMany:
+        groups:
+            nullable: true
+            targetEntity: Webkul\UVDesk\CoreBundle\Entity\SupportGroup
+            joinTable:
+                name: preparedresponse_supportgroups
+                joinColumns:
+                    savedReply_id:
+                        referencedColumnName: id
+                        onDelete : cascade
+                inverseJoinColumns:
+                    group_id:
+                        referencedColumnName: id
+                        onDelete : cascade
+        teams:
+            nullable: true        
+            targetEntity: Webkul\UVDesk\CoreBundle\Entity\SupportTeam
+            joinTable:
+                name: preparedresponse_supportteams
+                joinColumns:
+                    savedReply_id:
+                        referencedColumnName: id
+                        onDelete : cascade                        
+                inverseJoinColumns:
+                    subgroup_id:
+                        referencedColumnName: id
+                        onDelete : cascade
+    lifecycleCallbacks: 
+        prePersist: [ setCreatedAtValue ]
+        preUpdate: [ setUpdatedAtValue ]   
